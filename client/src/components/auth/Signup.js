@@ -4,7 +4,13 @@ import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
-import styled from "styled-components";
+import {
+  Container,
+  Content,
+  InputField,
+  OutputField,
+  SubmitButton
+} from "../named-components";
 
 class Signup extends Component {
   // On submitting the form, pass in the email and password,
@@ -54,52 +60,6 @@ class Signup extends Component {
     );
   }
 }
-
-const Container = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  main {
-    flex-direction: column;
-    display: flex;
-  }
-`;
-
-const Content = styled.div`
-  position: relative;
-  background-color: lightgray;
-  width: 50%;
-  height: 50%;
-  margin: 0 auto;
-  padding-top: 10%
-  display: flex;
-  justify-content: center;
-`;
-
-const InputField = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-`;
-
-const OutputField = styled(InputField)`
-  margin-bottom: 10px;
-`;
-
-const SubmitButton = styled.button`
-  background-color: lightblue;
-  margin: 20px;
-  padding: 20px;
-  padding: 20px;
-  :hover {
-    background-color: skyblue;
-  }
-  :active {
-    background-color: teal;
-  }
-`;
 
 // Set the error message if the user tries to sign up
 // with an email that was already used
