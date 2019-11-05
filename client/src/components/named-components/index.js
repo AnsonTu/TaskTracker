@@ -12,31 +12,38 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-position: relative;
-background-color: lightgray;
-width: 50%;
-height: 50%;
-margin: 0 auto;
-padding-top: 10%
-display: flex;
-justify-content: center;
+  display: flex;
+  position: relative;
+  background-color: lightgray;
+  width: 50%;
+  height: 60%;
+  margin: auto;
+  margin-top: 10%;
+  justify-content: center;
+`;
+
+export const MainHeader = styled.h1`
+  margin-top: 18%;
+  margin-bottom: 10%;
+  text-align: center;
 `;
 
 export const InputField = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  padding: 2px;
 `;
 
 export const OutputField = styled(InputField)`
-  margin-bottom: 10px;
+  margin: 15px;
 `;
 
 export const SubmitButton = styled.button`
   background-color: lightblue;
-  margin: 20px;
+  margin-top: 12%;
   padding: 20px;
+  width: 75%;
   :hover {
     background-color: skyblue;
   }

@@ -7,6 +7,7 @@ import * as actions from "../../actions";
 import {
   Container,
   Content,
+  MainHeader,
   InputField,
   OutputField,
   SubmitButton
@@ -24,6 +25,7 @@ class Signup extends Component {
   };
   render() {
     const { handleSubmit } = this.props;
+    const textboxStyle = { width: "50%" };
     return (
       <Container>
         <Helmet>
@@ -31,7 +33,7 @@ class Signup extends Component {
         </Helmet>
         <Content>
           <form onSubmit={handleSubmit(this.onSubmit)}>
-            <h2>Sign up with your email address</h2>
+            <MainHeader>Sign up with your email address</MainHeader>
             <InputField>
               <Field
                 name="email"
@@ -39,6 +41,7 @@ class Signup extends Component {
                 component="input"
                 autoComplete="none"
                 placeholder="Email"
+                style={textboxStyle}
               />
             </InputField>
             <InputField>
@@ -48,6 +51,7 @@ class Signup extends Component {
                 component="input"
                 autoComplete="new-password"
                 placeholder="Password"
+                style={textboxStyle}
               />
             </InputField>
             <InputField>

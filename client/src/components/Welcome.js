@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Container, Content } from "./named-components";
+import { Container, Content, MainHeader } from "./named-components";
 function Welcome() {
   return (
     <Container>
@@ -8,7 +8,10 @@ function Welcome() {
         <title>Welcome | Task Tracker</title>
       </Helmet>
       <Content>
-        <h3>Welcome! Sign up or sign in!</h3>
+        <MainHeader>
+          Welcome to Task Tracker! Sign up or sign in using one of the links in
+          the header!
+        </MainHeader>
       </Content>
     </Container>
   );
