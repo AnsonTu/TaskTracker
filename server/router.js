@@ -1,7 +1,8 @@
 const Authentication = require("./controllers/authentication");
 const passportService = require("./services/passport");
 const passport = require("passport");
-
+const tasks = require("./controllers/tasks");
+                     
 // By default, passport wants to create a cookie-based session for this request
 // Set session to false when using JWT
 const requireAuth = passport.authenticate("jwt", { session: false });
@@ -24,4 +25,7 @@ module.exports = function(app) {
   });
   app.post("/signin", requireSignin, Authentication.signin);
   app.post("/signup", Authentication.signup);
+
+  app.post("/tasks/add",tasks.addtask);
+
 };
