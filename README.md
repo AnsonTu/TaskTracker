@@ -13,3 +13,9 @@ A web application built using React, Redux, Node.js, Express, and MongoDB for tr
 - Run an instance of Mongo using `mongod` under the project root directory, or any directory under it.
 - To start the server, enter the server directory and run `yarn dev`.
 - To start the client, enter the client directory and run `yarn start`.
+
+## Testing endpoints
+
+- To test endpoints that are hidden behind authentication, a JWT token is needed.
+- To create a JWT, open the network tab, create an account from the sign up page, and copy the token.
+- The token needs to be placed under the authentication header.
