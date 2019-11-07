@@ -21,9 +21,8 @@ exports.signup = function(req, res, next) {
   const password = req.body.password;
 
   if (!email || !password) {
-    return res
-      .status(422)
-      .send({ error: "You must provide an email and password" });
+    res.statusMessage = "You must provide an email and password";
+    return res.status(422).send({ error: res.statusMessage });
   }
 
   // Check if a user with the given email exists
@@ -34,7 +33,8 @@ exports.signup = function(req, res, next) {
 
     // If a user with the email does exist, return an error
     if (existingUser) {
-      return res.status(422).send({ error: "Email is in use" });
+      res.statusMessage = "Email is in use";
+      return res.status(422).send({ error: res.statusMessage });
     }
 
     // If a user with email does not exist, create and save user record
