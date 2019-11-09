@@ -1,6 +1,7 @@
 const Authentication = require("./controllers/authentication");
 const passportService = require("./services/passport");
 const passport = require("passport");
+const tasks = require("./controllers/tasks");
 
 // By default, passport wants to create a cookie-based session for this request
 // Set session to false when using JWT
@@ -24,4 +25,11 @@ module.exports = function(app) {
   });
   app.post("/signin", requireSignin, Authentication.signin);
   app.post("/signup", Authentication.signup);
+
+  app.post("/tasks/add", tasks.addtask);
+  app.get("/tasks/", tasks.getTasks);
+
+  //routing will probably change too for delete and update
+  app.delete("/tasks/:id", tasks.deleteTask);
+  app.post("/tasks/:id", tasks.updateTasks);
 };
