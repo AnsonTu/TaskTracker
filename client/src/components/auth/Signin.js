@@ -1,8 +1,17 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
+import {
+  Container,
+  Content,
+  MainHeader,
+  InputField,
+  OutputField,
+  SubmitButton
+} from "../named-components";
 
 class Signin extends Component {
   // On submitting the form, pass in the email and password,
@@ -16,29 +25,42 @@ class Signin extends Component {
   };
   render() {
     const { handleSubmit } = this.props;
+    const textboxStyle = { width: "50%" };
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <fieldset>
-          <label>Email</label>
-          <Field
-            name="email"
-            type="text"
-            component="input"
-            autoComplete="none"
-          />
-        </fieldset>
-        <fieldset>
-          <label>Password</label>
-          <Field
-            name="password"
-            type="password"
-            component="input"
-            autoComplete="new-password"
-          />
-        </fieldset>
-        <div>{this.props.errorMessage}</div>
-        <button>Sign In!</button>
-      </form>
+      <Container>
+        <Helmet>
+          <title>Sign In | Task Manager</title>
+        </Helmet>
+        <Content>
+          <form onSubmit={handleSubmit(this.onSubmit)}>
+            <MainHeader>Sign in with your email address</MainHeader>
+            <InputField>
+              <Field
+                name="email"
+                type="text"
+                component="input"
+                autoComplete="none"
+                placeholder="Email"
+                style={textboxStyle}
+              />
+            </InputField>
+            <InputField>
+              <Field
+                name="password"
+                type="password"
+                component="input"
+                autoComplete="new-password"
+                placeholder="Password"
+                style={textboxStyle}
+              />
+            </InputField>
+            <InputField>
+              <SubmitButton>SIGN IN</SubmitButton>
+            </InputField>
+            <OutputField>{this.props.errorMessage}</OutputField>
+          </form>
+        </Content>
+      </Container>
     );
   }
 }
