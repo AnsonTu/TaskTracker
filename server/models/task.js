@@ -6,6 +6,7 @@ const taskSchema = new Schema({
     description:{type:String},
     completion: {type:Boolean, required:true},
     dueDate:{type:Date, required: true},
+    startDate:{type:Date, required: true}
 });
 
 const TaskClass = mongoose.model('task', taskSchema);

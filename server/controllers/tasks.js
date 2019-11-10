@@ -4,12 +4,14 @@ exports.addtask = function(req, res, next) {
   const task = req.body.task;
   const description = req.body.description;
   const dueDate = Date.parse(req.body.dueDate);
+  const startDate = Date.parse(req.body.startDate);
   const completion = Boolean(req.body.completion);
 
   const new_task = new Tasks({
     task,
     description,
     dueDate,
+    startDate,
     completion
   });
 
@@ -38,6 +40,7 @@ exports.updateTasks = function(req, res, next) {
     task.description = req.body.description;
     task.dueDate = req.body.dueDate;
     task.completion = req.body.completion;
+    task.startDate = req.body.startDate;
 
     task.save()
     .then(() => res.json("Task was updated!"))
