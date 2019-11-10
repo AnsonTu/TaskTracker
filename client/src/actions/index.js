@@ -17,7 +17,7 @@ export const signup = (formProps, callback) => async dispatch => {
     // Redirect the user
     callback();
   } catch (e) {
-    dispatch({ type: AUTH_ERROR, payload: "Email in use" });
+    dispatch({ type: AUTH_ERROR, payload: e.response.statusText });
   }
 };
 
