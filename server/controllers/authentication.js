@@ -33,7 +33,8 @@ exports.signup = function(req, res, next) {
 
     // If a user with the email does exist, return an error
     if (existingUser) {
-      res.statusMessage = "Email is in use";
+      res.statusMessage =
+        "This email is already in use. Please enter another email.";
       return res.status(422).send({ error: res.statusMessage });
     }
 
