@@ -1,36 +1,47 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import axios from "axios";
 import requireAuth from "./requireAuth";
-import {
-  Container,
-  Content,
-  InputField,
-  SubmitButton
-} from "./named-components";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import * as actions from "../actions";
+import { Container, Content } from "./named-components";
+import CurrentTask from "./task/CurrentTask";
 
 class HomePage extends Component {
-  getTasks = async () => {
-    const tasks = await axios.get("http://localhost:3090/tasks", {
-      headers: { authorization: localStorage.getItem("token") }
-    });
-    return tasks.data;
+  componentDidMount = () => {
+    const { auth: authenticated } = this.props;
+    this.props.fetchTasks(authenticated);
   };
-  render() {
-    const tasks = this.getTasks();
-    tasks.then(function(result) {
-      console.log(result);
-    });
 
+  render() {
+    const { tasks } = this.props;
     return (
       <Container>
         <Helmet>
           <title>Tasks | Task Tracker</title>
         </Helmet>
-        <Content>{console.log(tasks)}</Content>
+        <TaskList>
+          {tasks ? (
+            tasks.map(task => (
+              <CurrentTask task={task} key={task._id}></CurrentTask>
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
+        </TaskList>
       </Container>
     );
   }
 }
 
-export default requireAuth(HomePage);
+const TaskList = styled(Content)`
+background-color: darkgray
+  justify-content: left;
+  flex-direction: column;
+`;
+
+function mapStateToProps(state) {
+  return { errorMessage: state.task.errorMessage, tasks: state.task.tasks };
+}
+
+export default connect(mapStateToProps, actions)(requireAuth(HomePage));
