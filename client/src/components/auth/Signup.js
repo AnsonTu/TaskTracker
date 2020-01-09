@@ -18,9 +18,9 @@ class Signup extends Component {
   // and redirect the user if sign up was successful
   onSubmit = formProps => {
     this.props.signup(formProps, () => {
-      // Use React-Router to redirect the user to /feature
+      // Use React-Router to redirect the user to /home
       // after signing up
-      this.props.history.push("/feature");
+      this.props.history.push("/home");
     });
   };
   render() {
@@ -74,9 +74,6 @@ function mapStateToProps(state) {
 // First argument of connect is the state we are passing.
 // Second argument of connect is the actions object
 export default compose(
-  connect(
-    mapStateToProps,
-    actions
-  ),
+  connect(mapStateToProps, actions),
   reduxForm({ form: "signup" })
 )(Signup);
