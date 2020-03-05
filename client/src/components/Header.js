@@ -8,15 +8,15 @@ class Header extends Component {
     if (this.props.authenticated) {
       return (
         <div>
-          <Link to="/signout">Sign Out</Link>
-          <Link to="/home">Home Page</Link>
+          <HeaderLink to="/signout">Sign Out</HeaderLink>
+          <HeaderLink to="/home">Home Page</HeaderLink>
         </div>
       );
     } else {
       return (
         <div>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/signin">Sign In</Link>
+          <HeaderLink to="/signup">Sign Up</HeaderLink>
+          <HeaderLink to="/signin">Sign In</HeaderLink>
         </div>
       );
     }
@@ -24,7 +24,9 @@ class Header extends Component {
   render() {
     return (
       <Container>
-        <Link to="/">Redux Auth</Link>
+        <div>
+          <HeaderLink to="/">Menu</HeaderLink>
+        </div>
         {this.renderLinks()}
       </Container>
     );
@@ -33,10 +35,27 @@ class Header extends Component {
 
 const Container = styled.div`
   position: fixed;
-  top: 0;
+  top: 8px;
   width: 100%;
   z-index: 999;
-  background-color: white;
+  display: flex;
+`;
+
+const HeaderLink = styled(Link)`
+  padding: 8px 20px;
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  &:hover {
+    background-color: lightgray;
+  }
+  &:link,
+  &:visited {
+    color: black;
+  }
 `;
 
 function mapStateToProps(state) {
