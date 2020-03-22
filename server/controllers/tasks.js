@@ -1,17 +1,19 @@
 const Tasks = require("../models/task");
 
 exports.addtask = function(req, res, next) {
+  const userID = req.body.userID;
   const task = req.body.task;
   const description = req.body.description;
-  const dueDate = Date.parse(req.body.dueDate);
   const startDate = Date.parse(req.body.startDate);
+  const dueDate = Date.parse(req.body.dueDate);
   const completion = Boolean(req.body.completion);
 
   const new_task = new Tasks({
+    userID,
     task,
     description,
-    dueDate,
     startDate,
+    dueDate,
     completion
   });
 
@@ -28,8 +30,28 @@ exports.deleteTask = function(req, res, next) {
 };
 
 exports.getTasks = function(req, res, next) {
-  Tasks.find()
-    .then(tasks => res.json(tasks))
+  const userID = req.user._id;
+
+  if (!userID) {
+    res.statusMessage = "Something went wrong, userID not found";
+    return res.status(422).send({ error: res.statusMessage });
+  }
+
+  let userTasks = [];
+  let index = 0;
+  Tasks.find({ userID: userID }, function(err, tasks) {
+    if (err) {
+      return next(err);
+    }
+    tasks &&
+      tasks.forEach(task => {
+        if (task.userID === req.user._id) {
+          userTasks[index] = task;
+          index++;
+        }
+      });
+  })
+    .then(userTasks => res.json(userTasks))
     .catch(err => res.status(400).json("Error:" + err));
 };
 
