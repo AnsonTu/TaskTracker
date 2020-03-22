@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.Types.ObjectId;
 
 const taskSchema = new Schema({
-  userID: { type: ObjectId },
+  userID: { type: String, required: true },
   task: { type: String, required: true },
   description: { type: String },
-  completion: { type: Boolean, required: true },
   startDate: { type: Date, required: true },
-  dueDate: { type: Date, required: true }
+  dueDate: { type: Date, required: true },
+  completion: { type: Boolean, required: true }
 });
 
 const TaskClass = mongoose.model("task", taskSchema);
