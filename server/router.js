@@ -27,7 +27,7 @@ module.exports = function(app) {
   app.post("/signup", Authentication.signup);
 
   app.post("/tasks/add", requireAuth, tasks.addtask);
-  app.get("/tasks/", requireAuth, tasks.getTasks);
+  app.get("/tasks", requireAuth, tasks.getTasks);
 
   //routing will probably change too for delete and update
   app.delete("/tasks/:id", requireAuth, tasks.deleteTask);

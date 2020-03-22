@@ -26,7 +26,7 @@ class HomePage extends Component {
               <CurrentTask task={task} key={task._id}></CurrentTask>
             ))
           ) : (
-            <div>Loading...</div>
+            <LoadingTag>Loading...</LoadingTag>
           )}
         </TaskList>
       </Container>
@@ -38,6 +38,11 @@ const TaskList = styled(Content)`
 background-color: darkgray
   justify-content: left;
   flex-direction: column;
+`;
+
+const LoadingTag = styled.div`
+  font-size: 30px;
+  text-align: center;
 `;
 
 function mapStateToProps(state) {
