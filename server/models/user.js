@@ -17,17 +17,17 @@ const userSchema = new Schema({
 
 // On Save Hook, encrypt password
 // Before saving a model, run this function
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function (next) {
   // Get access to the user model
   const user = this; //user.email, user.password
 
   // Generate a salt, then run callback
-  bcrypt.genSalt(10, function(err, salt) {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) {
       return next(err);
     }
     // Hash (encrypt) the password using the salt
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(user.password, salt, null, function (err, hash) {
       if (err) {
         return next(err);
       }
@@ -40,8 +40,8 @@ userSchema.pre("save", function(next) {
   });
 });
 
-userSchema.methods.comparePassword = function(candidatePassword, callback) {
-  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) {
       return callback(err);
     }

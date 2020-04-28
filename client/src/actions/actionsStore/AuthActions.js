@@ -2,7 +2,7 @@ import axios from "axios";
 import { AUTH_USER, AUTH_ERROR } from "../types";
 
 // formProps consists of the email and password
-export const signup = (formProps, callback) => async dispatch => {
+export const signup = (formProps, callback) => async (dispatch) => {
   // Try to sign up with the credentials (formProps) provided by the user
   // If sign up is successful, redirect the user to /home
   // Otherwise, display an error message
@@ -22,7 +22,7 @@ export const signup = (formProps, callback) => async dispatch => {
 };
 
 // formProps consists of the email and password
-export const signin = (formProps, callback) => async dispatch => {
+export const signin = (formProps, callback) => async (dispatch) => {
   // Try to sign in with the credentials (formProps) provided by the user
   // If sign in is successful, redirect the user to /home
   // Otherwise, display an error message

@@ -12,7 +12,7 @@ class TaskBox extends Component {
         <br />
         {`Description: ${task.description}`}
         <br />
-        {`Start Data: ${task.startDate}`}
+        {`Start Date: ${task.startDate}`}
         <br />
         {`Due Date: ${task.dueDate}`}
         <br />

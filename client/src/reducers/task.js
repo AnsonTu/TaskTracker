@@ -2,12 +2,12 @@ import {
   FETCH_TASKS,
   FETCH_FAILED,
   CREATE_TASK,
-  CREATE_TASK_FAILED,
+  CREATE_TASK_FAILED
 } from "../actions/types";
 
 const INITIAL_STATE = {
   authenticated: "",
-  errorMessage: "",
+  errorMessage: ""
 };
 
 export default function (state = INITIAL_STATE, action) {

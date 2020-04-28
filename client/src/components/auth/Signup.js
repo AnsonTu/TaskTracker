@@ -10,7 +10,7 @@ import {
   MainHeader,
   InputField,
   OutputField,
-  SubmitButton,
+  SubmitButton
 } from "../named-components";
 
 class Signup extends Component {
