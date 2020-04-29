@@ -17,7 +17,10 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_FAILED:
       return { ...state, errorMessage: action.payload };
     case CREATE_TASK:
-      return { ...state, tasks: action.payload };
+      const { tasks } = state;
+      let allTasks = tasks.slice();
+      allTasks.splice(tasks.length, 0, action.payload);
+      return { ...state, tasks: allTasks };
     case CREATE_TASK_FAILED:
       return { ...state, errorMessage: action.payload };
     default:

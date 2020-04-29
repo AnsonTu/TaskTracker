@@ -18,7 +18,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const { tasks } = this.props;
+    const { auth: authenticated, tasks } = this.props;
 
     const openModal = () => {
       this.setState({ isOpen: true });
@@ -34,17 +34,17 @@ class HomePage extends Component {
         </Helmet>
         <TaskList>
           {tasks ? (
-            tasks.map(task => <TaskBox task={task} key={task._id}></TaskBox>)
+            tasks.map((task) => <TaskBox task={task} key={task._id}></TaskBox>)
           ) : (
             <LoadingTag>Loading...</LoadingTag>
           )}
-          <NewTaskButton onClick={openModal}>+ New Task</NewTaskButton>
+          <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton>
+          {this.state.isOpen && (
+            <Suspense fallback={null}>
+              <TaskModal token={authenticated} closeModal={closeModal} />
+            </Suspense>
+          )}
         </TaskList>
-        {this.state.isOpen && (
-          <Suspense fallback={null}>
-            <TaskModal closeModal={closeModal} />
-          </Suspense>
-        )}
       </Container>
     );
   }
@@ -64,12 +64,13 @@ const LoadingTag = styled.div`
   text-align: center;
 `;
 
-const NewTaskButton = styled.button`
-  width: 90px;
-  height: 30px;
+const AddTaskButton = styled.button`
+  width: 120px;
+  height: 50px;
   position: absolute;
-  margin: 5px;
-  bottom: 0;
+  bottom: 20px;
+  left: 30px;
+  font-size: 18px;
 `;
 
 function mapStateToProps(state) {

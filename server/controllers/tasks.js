@@ -1,7 +1,7 @@
 const Tasks = require("../models/task");
 
 exports.addtask = function (req, res, next) {
-  const userID = req.body.userID;
+  const userID = req.user._id;
   const task = req.body.task;
   const description = req.body.description;
   const startDate = Date.parse(req.body.startDate);
@@ -13,12 +13,12 @@ exports.addtask = function (req, res, next) {
     description,
     startDate,
     dueDate,
-    completion: false,
+    completion: false
   });
 
   new_task
     .save()
-    .then(() => res.json("New task was added!"))
+    .then(() => res.json(new_task))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
