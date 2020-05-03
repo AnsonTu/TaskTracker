@@ -4,7 +4,7 @@ import requireAuth from "./requireAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import * as actions from "../actions";
-import { Container, Content } from "./named-components";
+import { PageContentContainer } from "./named-components";
 import TaskBox from "./task/TaskBox";
 
 const TaskModal = React.lazy(() => import("./task/TaskModal"));
@@ -28,35 +28,61 @@ class HomePage extends Component {
     };
 
     return (
-      <Container>
+      <PageContentContainer>
         <Helmet>
           <title>Tasks | Task Tracker</title>
         </Helmet>
-        <TaskList>
+        {this.state.isOpen && (
+          <Suspense fallback={null}>
+            <Modal>
+              <TaskModal token={authenticated} closeModal={closeModal} />
+            </Modal>
+          </Suspense>
+        )}
+        <ListColumn>
+          <ListTitle>Your Tasks</ListTitle>
           {tasks ? (
             tasks.map((task) => <TaskBox task={task} key={task._id}></TaskBox>)
           ) : (
             <LoadingTag>Loading...</LoadingTag>
           )}
-          <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton>
-          {this.state.isOpen && (
-            <Suspense fallback={null}>
-              <TaskModal token={authenticated} closeModal={closeModal} />
-            </Suspense>
-          )}
-        </TaskList>
-      </Container>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Tasks In Progress</ListTitle>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Completed Tasks</ListTitle>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Late Tasks</ListTitle>
+        </ListColumn>
+        <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton>
+      </PageContentContainer>
     );
   }
 }
 
-const TaskList = styled(Content)`
+const Modal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: start;
+`;
+
+const ListTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 12px;
+  padding-left: 16px;
+`;
+
+const ListColumn = styled.div`
   background-color: darkgray;
-  margin-top: 5%;
-  width: 80%;
-  height: 70%;
-  justify-content: left;
-  flex-direction: column;
+  margin-top: 60px;
+  margin-left: 20px;
+  width: 280px;
+  height: 75%;
+  overflow-y: auto;
+  float: left;
 `;
 
 const LoadingTag = styled.div`

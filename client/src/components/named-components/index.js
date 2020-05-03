@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const PageContentContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: auto;
   background-color: black;
+`;
+
+export const Container = styled(PageContentContainer)`
   main {
     display: flex;
   }

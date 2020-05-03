@@ -10,6 +10,9 @@ class TaskModal extends Component {
   render() {
     const { token, closeModal, createTask, handleSubmit } = this.props;
 
+    const inputStyles = { resize: "none", fontSize: "16px" };
+    const descriptionStyles = { ...inputStyles, height: "90px" };
+
     const onSubmit = (formProps) => {
       createTask(token, formProps);
     };
@@ -17,7 +20,7 @@ class TaskModal extends Component {
     return (
       <Modal>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <InnerModal>
+          <ModalContent>
             <InputField>
               <FieldLabel>Task</FieldLabel>
               <Field
@@ -25,6 +28,7 @@ class TaskModal extends Component {
                 type="text"
                 component="input"
                 autoComplete="none"
+                style={inputStyles}
               />
             </InputField>
             <InputField>
@@ -32,20 +36,31 @@ class TaskModal extends Component {
               <Field
                 name="description"
                 type="text"
-                component="input"
+                component="textarea"
                 autoComplete="none"
+                style={descriptionStyles}
               />
             </InputField>
             <InputField>
               <FieldLabel>Start Date</FieldLabel>
-              <Field name="startDate" type="date" component="input" />
+              <Field
+                name="startDate"
+                type="date"
+                component="input"
+                style={inputStyles}
+              />
             </InputField>
             <InputField>
               <FieldLabel>Due Date</FieldLabel>
-              <Field name="dueDate" type="date" component="input" />
+              <Field
+                name="dueDate"
+                type="date"
+                component="input"
+                style={inputStyles}
+              />
             </InputField>
             <OutputField>{this.props.errorMessage}</OutputField>
-          </InnerModal>
+          </ModalContent>
           <CloseButton onClick={closeModal}>Close</CloseButton>
           <CreateButton>Create Task</CreateButton>
         </form>
@@ -58,13 +73,12 @@ const Modal = styled.div`
   position: absolute;
   border: 2px solid black;
   background-color: lightgray;
-  margin-top: 5%;
-  width: 35%
-  height: 50%;
-  flex-direction: column;
+  margin-top: 75px;
+  width: 500px;
+  height: 40%;
 `;
 
-const InnerModal = styled.div`
+const ModalContent = styled.div`
   position: relative;
   margin: 20px;
 `;
@@ -75,16 +89,16 @@ const FieldLabel = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  width: 20%;
-  height: 15%;
+  width: 15%;
+  height: 12%;
   bottom: 15px;
   left: 15px;
 `;
 
 const CreateButton = styled.button`
   position: absolute;
-  width: 30%;
-  height: 15%;
+  width: 25%;
+  height: 12%;
   bottom: 15px;
   right: 15px;
 `;
