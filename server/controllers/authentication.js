@@ -8,14 +8,14 @@ function tokenForUser(user) {
 }
 
 // Export function for `/signin` route to return
-exports.signin = function(req, res, next) {
+exports.signin = function (req, res, next) {
   // User has already had their email and password authenticated
   // Now we need to give them a token
   res.send({ token: tokenForUser(req.user) });
 };
 
 // Export function for `/signup` route to return
-exports.signup = function(req, res, next) {
+exports.signup = function (req, res, next) {
   // Take information from request
   const email = req.body.email;
   const password = req.body.password;
@@ -26,7 +26,7 @@ exports.signup = function(req, res, next) {
   }
 
   // Check if a user with the given email exists
-  User.findOne({ email: email }, function(err, existingUser) {
+  User.findOne({ email: email }, function (err, existingUser) {
     if (err) {
       return next(err);
     }
@@ -44,7 +44,7 @@ exports.signup = function(req, res, next) {
       password: password
     });
     // Save the new user to the database
-    user.save(function(err) {
+    user.save(function (err) {
       if (err) {
         return next(err);
       }

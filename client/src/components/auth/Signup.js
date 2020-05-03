@@ -16,7 +16,7 @@ import {
 class Signup extends Component {
   // On submitting the form, pass in the email and password,
   // and redirect the user if sign up was successful
-  onSubmit = formProps => {
+  onSubmit = (formProps) => {
     this.props.signup(formProps, () => {
       // Use React-Router to redirect the user to /home
       // after signing up

@@ -1,48 +1,102 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import requireAuth from "./requireAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import * as actions from "../actions";
-import { Container, Content } from "./named-components";
-import CurrentTask from "./task/CurrentTask";
+import { PageContentContainer } from "./named-components";
+import TaskBox from "./task/TaskBox";
+
+const TaskModal = React.lazy(() => import("./task/TaskModal"));
 
 class HomePage extends Component {
+  state = { isOpen: false };
+
   componentDidMount = () => {
     const { auth: authenticated } = this.props;
     this.props.fetchTasks(authenticated);
   };
 
   render() {
-    const { tasks } = this.props;
+    const { auth: authenticated, tasks } = this.props;
+
+    const openModal = () => {
+      this.setState({ isOpen: true });
+    };
+    const closeModal = () => {
+      this.setState({ isOpen: false });
+    };
+
     return (
-      <Container>
+      <PageContentContainer>
         <Helmet>
           <title>Tasks | Task Tracker</title>
         </Helmet>
-        <TaskList>
+        {this.state.isOpen && (
+          <Suspense fallback={null}>
+            <Modal>
+              <TaskModal token={authenticated} closeModal={closeModal} />
+            </Modal>
+          </Suspense>
+        )}
+        <ListColumn>
+          <ListTitle>Your Tasks</ListTitle>
           {tasks ? (
-            tasks.map(task => (
-              <CurrentTask task={task} key={task._id}></CurrentTask>
-            ))
+            tasks.map((task) => <TaskBox task={task} key={task._id}></TaskBox>)
           ) : (
             <LoadingTag>Loading...</LoadingTag>
           )}
-        </TaskList>
-      </Container>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Tasks In Progress</ListTitle>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Completed Tasks</ListTitle>
+        </ListColumn>
+        <ListColumn>
+          <ListTitle>Late Tasks</ListTitle>
+        </ListColumn>
+        <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton>
+      </PageContentContainer>
     );
   }
 }
 
-const TaskList = styled(Content)`
-background-color: darkgray
-  justify-content: left;
-  flex-direction: column;
+const Modal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: start;
+`;
+
+const ListTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 12px;
+  padding-left: 16px;
+`;
+
+const ListColumn = styled.div`
+  background-color: darkgray;
+  margin-top: 60px;
+  margin-left: 20px;
+  width: 280px;
+  height: 75%;
+  overflow-y: auto;
+  float: left;
 `;
 
 const LoadingTag = styled.div`
   font-size: 30px;
   text-align: center;
+`;
+
+const AddTaskButton = styled.button`
+  width: 120px;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  font-size: 18px;
 `;
 
 function mapStateToProps(state) {

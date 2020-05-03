@@ -15,6 +15,7 @@ class Header extends Component {
     } else {
       return (
         <div>
+          <HeaderLink to="/">Menu</HeaderLink>
           <HeaderLink to="/signup">Sign Up</HeaderLink>
           <HeaderLink to="/signin">Sign In</HeaderLink>
         </div>
@@ -22,14 +23,7 @@ class Header extends Component {
     }
   }
   render() {
-    return (
-      <Container>
-        <div>
-          <HeaderLink to="/">Menu</HeaderLink>
-        </div>
-        {this.renderLinks()}
-      </Container>
-    );
+    return <Container>{this.renderLinks()}</Container>;
   }
 }
 
