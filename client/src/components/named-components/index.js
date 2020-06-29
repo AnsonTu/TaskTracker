@@ -1,3 +1,6 @@
+// TODO: Deprecate this file
+// We should create individual files for reusable components
+// Styles for small things like headers should be handled using makeStyles from material-ui
 import styled from "styled-components";
 
 export const PageContentContainer = styled.div`
