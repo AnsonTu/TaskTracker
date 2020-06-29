@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { InputField, OutputField } from "../../named-components";
+import {
+  InputField,
+  OutputField
+} from "../../../../components/named-components";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import * as actions from "../../../actions";
+import * as actions from "../../../../actions";
 
 class TaskModal extends Component {
   render() {
