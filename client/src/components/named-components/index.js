@@ -11,29 +11,6 @@ export const PageContentContainer = styled.div`
   background-color: black;
 `;
 
-export const Container = styled(PageContentContainer)`
-  main {
-    display: flex;
-  }
-`;
-
-export const Content = styled.div`
-  display: flex;
-  position: relative;
-  background-color: lightgray;
-  width: 50%;
-  height: 60%;
-  margin: auto;
-  margin-top: 10%;
-  justify-content: center;
-`;
-
-export const MainHeader = styled.h1`
-  margin-top: 18%;
-  margin-bottom: 10%;
-  text-align: center;
-`;
-
 export const InputField = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,17 +20,4 @@ export const InputField = styled.div`
 
 export const OutputField = styled(InputField)`
   margin: 15px;
-`;
-
-export const SubmitButton = styled.button`
-  background-color: lightblue;
-  margin-top: 12%;
-  padding: 20px;
-  width: 75%;
-  :hover {
-    background-color: skyblue;
-  }
-  :active {
-    background-color: teal;
-  }
 `;

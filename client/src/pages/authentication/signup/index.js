@@ -1,21 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import * as actions from "../../../actions";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormModal from "../components/FormModal";
+import Button from "@material-ui/core/Button";
 import ReduxTextField from "../components/ReduxTextField";
-import * as actions from "../../../actions";
-import {
-  OutputField,
-  SubmitButton
-} from "../../../components/named-components";
 
 const useStyle = makeStyles({
-  mainHeader: { marginTop: "4rem", marginBottom: "4rem" }
+  mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
+  button: {
+    width: "14rem",
+    height: "3rem",
+    backgroundColor: "#8A26AB",
+    marginTop: "1.5rem",
+    marginBottom: "2.5rem"
+  },
+  buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
+  errorMessage: { color: "#FC0356", minHeight: "24px" }
 });
 
 const Signup = (props) => {
@@ -38,14 +44,14 @@ const Signup = (props) => {
         <title>Sign Up | Task Tracker</title>
       </Helmet>
       <FormModal>
-        <Grid
-          item
-          container
-          alignItems="center"
-          justify="center"
-          direction="column"
-        >
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="center"
+            direction="column"
+          >
             <Typography className={classes.mainHeader} variant="h1">
               Task Tracker
             </Typography>
@@ -54,19 +60,21 @@ const Signup = (props) => {
               label="Email"
               component={ReduxTextField}
               autoComplete="none"
-              placeholder="Email"
             />
             <Field
               name="password"
               label="Password"
               component={ReduxTextField}
               autoComplete="new-password"
-              placeholder="Password"
             />
-            <SubmitButton>Sign Up</SubmitButton>
-            <OutputField>{errorMessage}</OutputField>
-          </form>
-        </Grid>
+            <Typography className={classes.errorMessage}>
+              {errorMessage}
+            </Typography>
+            <Button className={classes.button} type="submit">
+              <Typography className={classes.buttonText}>Sign Up</Typography>
+            </Button>
+          </Grid>
+        </form>
       </FormModal>
     </>
   );

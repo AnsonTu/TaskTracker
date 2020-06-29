@@ -1,69 +1,87 @@
-import React, { Component } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import * as actions from "../../../actions";
-import {
-  Container,
-  Content,
-  MainHeader,
-  InputField,
-  OutputField,
-  SubmitButton
-} from "../../../components/named-components";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import FormModal from "../components/FormModal";
+import Button from "@material-ui/core/Button";
+import ReduxTextField from "../components/ReduxTextField";
+import PageContentContainer from "../../../components/PageContentContainer";
 
-class Signin extends Component {
+const useStyle = makeStyles({
+  mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
+  button: {
+    width: "14rem",
+    height: "3rem",
+    backgroundColor: "#8A26AB",
+    marginTop: "1.5rem",
+    marginBottom: "2.5rem"
+  },
+  buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
+  errorMessage: { color: "#FC0356", minHeight: "24px" }
+});
+
+const Signin = (props) => {
+  const { signin, history, handleSubmit, errorMessage } = props;
+  const classes = useStyle();
+
   // On submitting the form, pass in the email and password,
   // and redirect the user if sign in was successful
-  onSubmit = (formProps) => {
-    this.props.signin(formProps, () => {
+  const onSubmit = (formProps) => {
+    signin(formProps, () => {
       // Use React-Router to redirect the user to /home
       // after signing in
-      this.props.history.push("/home");
+      history.push("/home");
     });
   };
-  render() {
-    const { handleSubmit } = this.props;
-    const textboxStyle = { width: "50%" };
-    return (
-      <Container>
-        <Helmet>
-          <title>Sign In | Task Manager</title>
-        </Helmet>
-        <Content>
-          <form onSubmit={handleSubmit(this.onSubmit)}>
-            <MainHeader>Sign in with your email address</MainHeader>
-            <InputField>
+
+  return (
+    <>
+      <Helmet>
+        <title>Sign In | Task Manager</title>
+      </Helmet>
+      <PageContentContainer>
+        <FormModal>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid
+              item
+              container
+              alignItems="center"
+              justify="center"
+              direction="column"
+            >
+              <Typography className={classes.mainHeader} variant="h1">
+                Task Tracker
+              </Typography>
               <Field
                 name="email"
-                type="text"
-                component="input"
+                label="Email"
+                component={ReduxTextField}
                 autoComplete="none"
-                placeholder="Email"
-                style={textboxStyle}
               />
-            </InputField>
-            <InputField>
               <Field
                 name="password"
-                type="password"
-                component="input"
+                label="Password"
+                component={ReduxTextField}
                 autoComplete="new-password"
-                placeholder="Password"
-                style={textboxStyle}
               />
-            </InputField>
-            <InputField>
-              <SubmitButton>SIGN IN</SubmitButton>
-            </InputField>
-            <OutputField>{this.props.errorMessage}</OutputField>
+              <Typography className={classes.errorMessage}>
+                {errorMessage}
+              </Typography>
+              <Button className={classes.button} type="submit">
+                <Typography className={classes.buttonText}>Sign In</Typography>
+              </Button>
+            </Grid>
           </form>
-        </Content>
-      </Container>
-    );
-  }
-}
+        </FormModal>
+      </PageContentContainer>
+    </>
+  );
+};
 
 // Set the error message if the user tries to sign up
 // with an email that was already used
