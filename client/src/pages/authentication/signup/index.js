@@ -8,8 +8,8 @@ import * as actions from "../../../actions";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import FormModal from "../components/FormModal";
 import Button from "@material-ui/core/Button";
+import FormModal from "../components/FormModal";
 import ReduxTextField from "../components/ReduxTextField";
 
 const useStyle = makeStyles({
