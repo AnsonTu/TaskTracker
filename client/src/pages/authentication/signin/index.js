@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -15,14 +16,13 @@ import PageContentContainer from "../../../components/PageContentContainer";
 const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
   button: {
-    width: "14rem",
+    width: "10rem",
     height: "3rem",
     backgroundColor: "#8A26AB",
-    marginTop: "1.5rem",
-    marginBottom: "2.5rem"
+    margin: "1.5rem 2rem 2.5rem"
   },
   buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
-  errorMessage: { color: "#FC0356", minHeight: "24px" }
+  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px" }
 });
 
 const Signin = (props) => {
@@ -44,41 +44,46 @@ const Signin = (props) => {
       <Helmet>
         <title>Sign In | Task Manager</title>
       </Helmet>
-      <PageContentContainer>
-        <FormModal>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid
-              item
-              container
-              alignItems="center"
-              justify="center"
-              direction="column"
-            >
-              <Typography className={classes.mainHeader} variant="h1">
-                Task Tracker
-              </Typography>
-              <Field
-                name="email"
-                label="Email"
-                component={ReduxTextField}
-                autoComplete="none"
-              />
-              <Field
-                name="password"
-                label="Password"
-                component={ReduxTextField}
-                autoComplete="new-password"
-              />
-              <Typography className={classes.errorMessage}>
-                {errorMessage}
-              </Typography>
+      <FormModal>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid
+            item
+            container
+            alignItems="center"
+            justify="center"
+            direction="column"
+          >
+            <Typography className={classes.mainHeader} variant="h1">
+              Task Tracker
+            </Typography>
+            <Field
+              name="email"
+              label="Email"
+              component={ReduxTextField}
+              autoComplete="none"
+              error={errorMessage}
+            />
+            <Field
+              name="password"
+              label="Password"
+              component={ReduxTextField}
+              autoComplete="new-password"
+              error={errorMessage}
+            />
+            <Typography className={classes.errorMessage}>
+              {errorMessage}
+            </Typography>
+            <div>
+              <Button className={classes.button} component={Link} to={"/"}>
+                <Typography className={classes.buttonText}>Back</Typography>
+              </Button>
               <Button className={classes.button} type="submit">
                 <Typography className={classes.buttonText}>Sign In</Typography>
               </Button>
-            </Grid>
-          </form>
-        </FormModal>
-      </PageContentContainer>
+            </div>
+          </Grid>
+        </form>
+      </FormModal>
     </>
   );
 };

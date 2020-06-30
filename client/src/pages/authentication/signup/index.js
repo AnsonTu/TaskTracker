@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -14,14 +15,13 @@ import ReduxTextField from "../components/ReduxTextField";
 const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
   button: {
-    width: "14rem",
+    width: "10rem",
     height: "3rem",
     backgroundColor: "#8A26AB",
-    marginTop: "1.5rem",
-    marginBottom: "2.5rem"
+    margin: "1.5rem 2rem 2.5rem"
   },
   buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
-  errorMessage: { color: "#FC0356", minHeight: "24px" }
+  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px" }
 });
 
 const Signup = (props) => {
@@ -60,19 +60,26 @@ const Signup = (props) => {
               label="Email"
               component={ReduxTextField}
               autoComplete="none"
+              error={errorMessage}
             />
             <Field
               name="password"
               label="Password"
               component={ReduxTextField}
               autoComplete="new-password"
+              error={errorMessage}
             />
             <Typography className={classes.errorMessage}>
               {errorMessage}
             </Typography>
-            <Button className={classes.button} type="submit">
-              <Typography className={classes.buttonText}>Sign Up</Typography>
-            </Button>
+            <div>
+              <Button className={classes.button} component={Link} to={"/"}>
+                <Typography className={classes.buttonText}>Back</Typography>
+              </Button>
+              <Button className={classes.button} type="submit">
+                <Typography className={classes.buttonText}>Sign Up</Typography>
+              </Button>
+            </div>
           </Grid>
         </form>
       </FormModal>
