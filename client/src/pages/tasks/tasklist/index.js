@@ -1,15 +1,15 @@
 import React, { Component, Suspense } from "react";
 import { Helmet } from "react-helmet";
-import requireAuth from "./requireAuth";
+import requireAuth from "../../../utils/requireAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import * as actions from "../actions";
-import { PageContentContainer } from "./named-components";
-import TaskBox from "./task/TaskBox";
+import * as actions from "../../../actions";
+import { PageContentContainer } from "../../../components/named-components";
+import TaskBox from "../components/TaskBox";
 
-const TaskModal = React.lazy(() => import("./task/TaskModal"));
+const TaskModal = React.lazy(() => import("../components/TaskModal"));
 
-class HomePage extends Component {
+class TaskList extends Component {
   state = { isOpen: false };
 
   componentDidMount = () => {
@@ -103,4 +103,4 @@ function mapStateToProps(state) {
   return { errorMessage: state.task.errorMessage, tasks: state.task.tasks };
 }
 
-export default connect(mapStateToProps, actions)(requireAuth(HomePage));
+export default connect(mapStateToProps, actions)(requireAuth(TaskList));
