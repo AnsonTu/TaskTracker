@@ -6,7 +6,6 @@ import PageContentContainer from "../../../../components/PageContentContainer";
 
 const useStyle = makeStyles({
   container: {
-    height: "100vh",
     textAlign: "center"
   },
   formContainer: { width: "40rem", borderRadius: "15px" }
