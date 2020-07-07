@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-export default (ChildComponent) => {
+
+export const requireAuth = (ChildComponent) => {
   class ComposedComponent extends Component {
     // Our component just got rendered
     componentDidMount() {
