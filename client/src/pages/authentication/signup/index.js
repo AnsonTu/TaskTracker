@@ -57,6 +57,7 @@ const Signup = (props) => {
             </Typography>
             <Field
               name="email"
+              type="email"
               label="Email"
               component={ReduxTextField}
               autoComplete="none"
@@ -64,6 +65,7 @@ const Signup = (props) => {
             />
             <Field
               name="password"
+              type="password"
               label="Password"
               component={ReduxTextField}
               autoComplete="new-password"
