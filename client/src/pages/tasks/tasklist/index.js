@@ -1,10 +1,14 @@
 import React, { Component, Suspense } from "react";
 import { Helmet } from "react-helmet";
-import requireAuth from "../../../utils/requireAuth";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import { requireAuth } from "../../../utils";
 import * as actions from "../../../actions";
-import { PageContentContainer } from "../../../components/named-components";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import PageContentContainer from "../../../components/PageContentContainer";
+import styled from "styled-components";
+import ListColumn from "../components/ListColumn";
 import TaskBox from "../components/TaskBox";
 
 const TaskModal = React.lazy(() => import("../components/TaskModal"));
@@ -39,24 +43,21 @@ class TaskList extends Component {
             </Modal>
           </Suspense>
         )}
-        <ListColumn>
-          <ListTitle>Your Tasks</ListTitle>
-          {tasks ? (
-            tasks.map((task) => <TaskBox task={task} key={task._id}></TaskBox>)
-          ) : (
-            <LoadingTag>Loading...</LoadingTag>
-          )}
-        </ListColumn>
-        <ListColumn>
-          <ListTitle>Tasks In Progress</ListTitle>
-        </ListColumn>
-        <ListColumn>
-          <ListTitle>Completed Tasks</ListTitle>
-        </ListColumn>
-        <ListColumn>
-          <ListTitle>Late Tasks</ListTitle>
-        </ListColumn>
-        <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton>
+        <Grid item container xs={12}>
+          <ListColumn title="Your Tasks" showButton={true}>
+            {tasks ? (
+              tasks.map((task) => (
+                <TaskBox task={task} key={task._id}></TaskBox>
+              ))
+            ) : (
+              <CircularProgress />
+            )}
+          </ListColumn>
+          <ListColumn title="Tasks In Progress"></ListColumn>
+          <ListColumn title="Completed Tasks"></ListColumn>
+          <ListColumn title="Late Tasks"></ListColumn>
+        </Grid>
+        {/* <AddTaskButton onClick={openModal}>+ New Task</AddTaskButton> */}
       </PageContentContainer>
     );
   }
@@ -68,22 +69,15 @@ const Modal = styled.div`
   align-items: start;
 `;
 
-const ListTitle = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  padding-top: 12px;
-  padding-left: 16px;
-`;
-
-const ListColumn = styled.div`
-  background-color: darkgray;
-  margin-top: 60px;
-  margin-left: 20px;
-  width: 280px;
-  height: 75%;
-  overflow-y: auto;
-  float: left;
-`;
+// const ListColumn = styled.div`
+//   background-color: darkgray;
+//   margin-top: 60px;
+//   margin-left: 20px;
+//   width: 280px;
+//   height: 75%;
+//   overflow-y: auto;
+//   float: left;
+// `;
 
 const LoadingTag = styled.div`
   font-size: 30px;
