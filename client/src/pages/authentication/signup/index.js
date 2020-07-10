@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
@@ -25,8 +25,19 @@ const useStyle = makeStyles({
 });
 
 const Signup = (props) => {
-  const { signup, history, handleSubmit, errorMessage } = props;
+  const {
+    clearErrorMessage,
+    signup,
+    history,
+    handleSubmit,
+    errorMessage
+  } = props;
   const classes = useStyle();
+
+  // Clear the error message when the page is rendered
+  useEffect(() => {
+    clearErrorMessage();
+  }, [clearErrorMessage]);
 
   // On submitting the form, pass in the email and password,
   // and redirect the user if sign up was successful
