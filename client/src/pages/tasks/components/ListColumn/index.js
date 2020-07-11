@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -6,6 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import { useModal } from "../../../../utils";
+
+const TaskForm = React.lazy(() => import("../TaskForm"));
 
 const useStyle = makeStyles({
   column: {
@@ -44,6 +47,7 @@ const useStyle = makeStyles({
 
 const ListColumn = (props) => {
   const { title, showButton } = props;
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const classes = useStyle();
 
   return (
@@ -52,10 +56,21 @@ const ListColumn = (props) => {
         <Typography className={classes.title}>{title}</Typography>
         <Grid item container justify="center" xs={12}>
           <Divider className={classes.divider} />
-          <div className={classes.columnContainer}>{props.children}</div>
+          <div className={classes.columnContainer}>
+            {props.children}
+            {isOpen && (
+              <Suspense fallback={null}>
+                <TaskForm closeModal={handleCloseModal} />
+              </Suspense>
+            )}
+          </div>
         </Grid>
         {showButton && (
-          <Button className={classes.button} variant="text">
+          <Button
+            className={classes.button}
+            variant="text"
+            onClick={handleOpenModal}
+          >
             <NoteAddIcon fontSize="small" />
             <Typography className={classes.buttonText}>Add new task</Typography>
           </Button>

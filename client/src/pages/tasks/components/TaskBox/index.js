@@ -10,7 +10,7 @@ const useStyle = makeStyles({
   taskContainer: {
     margin: "0 10px 10px"
   },
-  divider: {
+  topDivider: {
     height: "2px",
     marginBottom: "12px"
   },
@@ -19,7 +19,12 @@ const useStyle = makeStyles({
     fontSize: "18px"
   },
   taskDetails: {
-    fontSize: "16px"
+    fontSize: "16px",
+    fontStyle: "italic"
+  },
+  bottomDivider: {
+    height: "2px",
+    marginTop: "12px"
   }
 });
 
@@ -27,14 +32,14 @@ const TaskBox = (props) => {
   const classes = useStyle();
 
   const {
-    task: { task, description, startDate, dueDate, completion }
+    task: { title, description, startDate, dueDate, completion }
   } = props;
   return (
     <Grid item container xs={12}>
       <Paper className={classes.taskContainer} elevation={2}>
         <div style={{ padding: "10px" }}>
-          <Typography className={classes.title}>{task}</Typography>
-          <Divider className={classes.divider} />
+          <Typography className={classes.title}>{title}</Typography>
+          <Divider className={classes.topDivider} />
           <Typography
             className={classes.taskDetails}
             style={{ marginBottom: "6px" }}
@@ -47,12 +52,16 @@ const TaskBox = (props) => {
           <Typography className={classes.taskDetails}>
             Due Date: {dueDate}
           </Typography>
+          <Divider className={classes.bottomDivider} />
           <Typography
             className={classes.taskDetails}
-            style={{ marginTop: "6px" }}
+            style={{ marginTop: "4px" }}
           >
-            Completion:{" "}
-            <Checkbox style={{ padding: "0" }} checked={completion} />
+            Mark as completed{" "}
+            <Checkbox
+              style={{ padding: "0", marginBottom: "2px" }}
+              checked={completion}
+            />
           </Typography>
         </div>
       </Paper>
