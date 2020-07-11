@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormModal from "../components/FormModal";
-import ReduxTextField from "../components/ReduxTextField";
+import ReduxTextField from "../../../components/ReduxTextField";
 
 const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
@@ -33,6 +33,9 @@ const Signin = (props) => {
     errorMessage
   } = props;
   const classes = useStyle();
+
+  // Style the text field
+  const textFieldStyle = { width: "60%", paddingBottom: "1.5rem" };
 
   // Clear the error message when the page is rendered
   useEffect(() => {
@@ -70,16 +73,18 @@ const Signin = (props) => {
               name="email"
               type="email"
               label="Email"
-              component={ReduxTextField}
+              style={textFieldStyle}
               autoComplete="none"
+              component={ReduxTextField}
               error={errorMessage}
             />
             <Field
               name="password"
               type="password"
               label="Password"
-              component={ReduxTextField}
+              style={textFieldStyle}
               autoComplete="new-password"
+              component={ReduxTextField}
               error={errorMessage}
             />
             <Typography className={classes.errorMessage}>
