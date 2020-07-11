@@ -2,14 +2,14 @@ const Tasks = require("../models/task");
 
 exports.addtask = function (req, res, next) {
   const userID = req.user._id;
-  const task = req.body.task;
+  const title = req.body.title;
   const description = req.body.description;
   const startDate = Date.parse(req.body.startDate);
   const dueDate = Date.parse(req.body.dueDate);
 
   const new_task = new Tasks({
     userID,
-    task,
+    title,
     description,
     startDate,
     dueDate,
@@ -58,7 +58,7 @@ exports.getTasks = function (req, res, next) {
 exports.updateTasks = function (req, res, next) {
   Tasks.findById(req.params.id)
     .then((task) => {
-      task.task = req.body.task;
+      task.title = req.body.title;
       task.description = req.body.description;
       task.dueDate = req.body.dueDate;
       task.completion = req.body.completion;

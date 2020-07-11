@@ -20,11 +20,11 @@ export const fetchTasks = (token) => async (dispatch) => {
 };
 
 // Create a new task
-export const createTask = (token, formProps) => async (dispatch) => {
+export const createTask = (token, formProps, onSuccess) => async (dispatch) => {
   try {
-    const { task, description, startDate, dueDate } = formProps;
+    const { title, description, startDate, dueDate } = formProps;
     const data = {
-      task,
+      title,
       description,
       startDate,
       dueDate
@@ -33,6 +33,7 @@ export const createTask = (token, formProps) => async (dispatch) => {
       headers: { authorization: token }
     });
     dispatch({ type: CREATE_TASK, payload: response.data });
+    onSuccess();
   } catch (e) {
     dispatch({ type: CREATE_TASK_FAILED, payload: "Could not create task" });
   }
