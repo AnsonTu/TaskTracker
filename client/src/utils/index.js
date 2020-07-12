@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
-export default (ChildComponent) => {
+
+export const requireAuth = (ChildComponent) => {
   class ComposedComponent extends Component {
     // Our component just got rendered
     componentDidMount() {
@@ -24,4 +25,17 @@ export default (ChildComponent) => {
     return { auth: state.auth.authenticated };
   }
   return connect(mapStateToProps)(ComposedComponent);
+};
+
+export const useModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  return { isOpen, handleOpenModal, handleCloseModal };
 };

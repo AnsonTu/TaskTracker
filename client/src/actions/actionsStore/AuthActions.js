@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_USER, AUTH_ERROR } from "../types";
+import { AUTH_USER, AUTH_ERROR, AUTH_CLEAR_ERROR } from "../types";
 
 // formProps consists of the email and password
 export const signup = (formProps, callback) => async (dispatch) => {
@@ -48,4 +48,9 @@ export const signout = () => {
     type: AUTH_USER,
     payload: ""
   };
+};
+
+// Clear the error message when the user revisists the signin or signup page
+export const clearErrorMessage = () => async (dispatch) => {
+  dispatch({ type: AUTH_CLEAR_ERROR });
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormModal from "../components/FormModal";
-import ReduxTextField from "../components/ReduxTextField";
+import ReduxTextField from "../../../components/ReduxTextField";
 
 const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
@@ -25,8 +25,22 @@ const useStyle = makeStyles({
 });
 
 const Signin = (props) => {
-  const { signin, history, handleSubmit, errorMessage } = props;
+  const {
+    clearErrorMessage,
+    signin,
+    history,
+    handleSubmit,
+    errorMessage
+  } = props;
   const classes = useStyle();
+
+  // Style the text field
+  const textFieldStyle = { width: "60%", paddingBottom: "1.5rem" };
+
+  // Clear the error message when the page is rendered
+  useEffect(() => {
+    clearErrorMessage();
+  }, [clearErrorMessage]);
 
   // On submitting the form, pass in the email and password,
   // and redirect the user if sign in was successful
@@ -57,16 +71,20 @@ const Signin = (props) => {
             </Typography>
             <Field
               name="email"
+              type="email"
               label="Email"
-              component={ReduxTextField}
+              style={textFieldStyle}
               autoComplete="none"
+              component={ReduxTextField}
               error={errorMessage}
             />
             <Field
               name="password"
+              type="password"
               label="Password"
-              component={ReduxTextField}
+              style={textFieldStyle}
               autoComplete="new-password"
+              component={ReduxTextField}
               error={errorMessage}
             />
             <Typography className={classes.errorMessage}>
