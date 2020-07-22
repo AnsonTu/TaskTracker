@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PageContentContainer from "../../../components/PageContentContainer";
 import ListColumn from "../components/ListColumn";
-import TaskBox from "../components/TaskBox";
+import TaskContainer from "../components/TaskContainer";
 
 class TaskList extends Component {
   componentDidMount = () => {
@@ -16,6 +16,8 @@ class TaskList extends Component {
   };
 
   render() {
+    // TODO: Filter tasks based on status, then assign
+    // proper task groups to each column
     const { tasks } = this.props;
 
     return (
@@ -26,9 +28,7 @@ class TaskList extends Component {
         <Grid item container xs={12}>
           <ListColumn title="Your Tasks" showButton={true}>
             {tasks ? (
-              tasks.map((task) => (
-                <TaskBox task={task} key={task._id}></TaskBox>
-              ))
+              tasks.map((task) => <TaskContainer task={task} key={task._id} />)
             ) : (
               <CircularProgress />
             )}
