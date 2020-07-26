@@ -28,6 +28,8 @@ const useStyle = makeStyles({
     height: "3px;"
   },
   columnContainer: {
+    minWidth: "50px",
+    minHeight: "50px",
     maxHeight: "700px",
     marginTop: "8px",
     overflowY: "auto"
@@ -51,7 +53,7 @@ const ListColumn = (props) => {
   const classes = useStyle();
 
   return (
-    <Grid item container xs={2} direction="column">
+    <Grid item container xs={12} sm={2} direction="column">
       <Paper className={classes.column}>
         <Typography className={classes.title}>{title}</Typography>
         <Grid item container justify="center" xs={12}>
@@ -60,7 +62,7 @@ const ListColumn = (props) => {
             {props.children}
             {isOpen && (
               <Suspense fallback={null}>
-                <TaskForm closeModal={handleCloseModal} />
+                <TaskForm isEditing={false} closeModal={handleCloseModal} />
               </Suspense>
             )}
           </div>
