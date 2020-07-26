@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "./Header";
+import AppRouter from "../router";
+import HeaderBar from "./HeaderBar";
 
-export default ({ children }) => {
+export default () => {
   return (
     <div>
-      <Header />
-      {children}
+      <HeaderBar />
+      <AppRouter />
     </div>
   );
 };
