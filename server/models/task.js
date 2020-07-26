@@ -5,9 +5,9 @@ const taskSchema = new Schema({
   userID: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String },
-  startDate: { type: Date, required: true },
-  dueDate: { type: Date, required: true },
-  completion: { type: Boolean, required: true }
+  startDate: { type: Date },
+  dueDate: { type: Date },
+  completion: { type: Boolean }
 });
 
 const TaskClass = mongoose.model("task", taskSchema);
