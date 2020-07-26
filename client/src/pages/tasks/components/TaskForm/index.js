@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import * as actions from "../../../../actions";
 import ReduxTextField from "../../../../components/ReduxTextField";
+import { formatDate } from "../../../../utils";
 
 const useStyle = makeStyles({
   taskContainer: {
@@ -18,11 +19,39 @@ const useStyle = makeStyles({
 });
 
 const TaskForm = (props) => {
-  const { auth, closeModal, createTask, handleSubmit } = props;
+  const {
+    auth,
+    task,
+    initialize,
+    isEditing,
+    closeModal,
+    createTask,
+    updateTask,
+    handleSubmit
+  } = props;
   const classes = useStyle();
 
+  // When the form is rendered for updating a task, fill in the input fields
+  useEffect(() => {
+    if (task) {
+      const { title, description, startDate, dueDate } = task;
+      const formattedStartDate = formatDate(startDate);
+      const formattedEndDate = formatDate(dueDate);
+      initialize({
+        title,
+        description,
+        startDate: formattedStartDate,
+        dueDate: formattedEndDate
+      });
+    }
+  }, [initialize, task]);
+
   const onSubmit = (formProps) => {
-    createTask(auth, formProps, closeModal);
+    if (isEditing) {
+      updateTask(auth, formProps, task._id, closeModal);
+    } else {
+      createTask(auth, formProps, closeModal);
+    }
   };
 
   return (
