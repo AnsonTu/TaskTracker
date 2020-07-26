@@ -4,8 +4,8 @@ exports.addtask = function (req, res, next) {
   const userID = req.user._id;
   const title = req.body.title;
   const description = req.body.description;
-  const startDate = req.body.startDate && Date.parse(req.body.startDate);
-  const dueDate = req.body.dueDate && Date.parse(req.body.dueDate);
+  const startDate = req.body.startDate;
+  const dueDate = req.body.dueDate;
 
   const new_task = new Tasks({
     userID,
