@@ -9,7 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import * as actions from "../../../../actions";
-import ReduxTextField from "../../../../components/ReduxTextField";
+import {ReduxTextField} from "../../../../components/ReduxTextField";
 
 const useStyle = makeStyles({
   taskContainer: {
