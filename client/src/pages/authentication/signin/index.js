@@ -10,7 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import FormModal from "../components/FormModal";
-import {ReduxTextField, ReduxTextFieldPass} from "../../../components/ReduxTextField";
+import ReduxTextField from "../../../components/ReduxTextField";
 
 const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
@@ -24,7 +24,7 @@ const useStyle = makeStyles({
     borderRadius:"15px"
   },
   buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
-  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px" }
+  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px", paddingBottom: "1.5rem"}
 });
 
 const Signin = (props) => {
@@ -86,7 +86,8 @@ const Signin = (props) => {
               label="Password"
               name="password"
               type="password"
-              component={ReduxTextFieldPass}
+              style={textFieldStyle}
+              component={ReduxTextField}
               autoComplete="new-password"
               error={errorMessage}
             />

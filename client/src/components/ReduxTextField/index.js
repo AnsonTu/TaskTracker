@@ -6,6 +6,7 @@ const ReduxTextField = (props) => {
 
   return (
     <TextField
+    style={{width:"60%", paddingBottom: "1.5rem"}}
       label={label}
       style={style}
       type={type ? type : "text"}
@@ -15,17 +16,4 @@ const ReduxTextField = (props) => {
   );
 };
 
-const ReduxTextFieldPass=(props) =>{
-  const {label, error, type} = props;
-
-  return(
-    <TextField
-      style={{width:"60%", paddingBottom: "1.5rem"}}
-      placeholder={label}
-      type={type}
-      error={!!error}
-    />
-  );
-};
-
-export {ReduxTextField, ReduxTextFieldPass}
+export default ReduxTextField
