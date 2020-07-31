@@ -4,7 +4,7 @@ A web application built using React, Redux, Node.js, Express, and MongoDB for tr
 
 ## Setting up the local environment
 
-- Add a `config.js` file under the server folder. This file will contain and export a secret for encrypting passwords added by a user.
+- Create a `config.js` file under the server folder, and copy the contents of the `config.template.js` file into it. Add a random string value to the `secret` property. The `config.js` file will contain and export a secret for encrypting passwords added by a user.
 - Install all dependencies by running `yarn install` under the client and server folders.
 - Install MongoDB on your device from the official website. If you are using Windows, remember to also create a data directory where Mongo can store data.
 
