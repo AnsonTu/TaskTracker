@@ -6,7 +6,6 @@ const ReduxTextField = (props) => {
 
   return (
     <TextField
-    style={{width:"60%", paddingBottom: "1.5rem"}}
       label={label}
       style={style}
       type={type ? type : "text"}

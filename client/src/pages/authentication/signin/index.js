@@ -82,7 +82,6 @@ const Signin = (props) => {
               error={errorMessage}
             />
             <Field
-              required          
               label="Password"
               name="password"
               type="password"
