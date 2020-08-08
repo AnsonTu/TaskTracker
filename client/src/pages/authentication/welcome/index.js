@@ -13,12 +13,13 @@ const useStyle = makeStyles({
     textAlign: "center"
   },
   mainHeader: { marginTop: "4rem", marginBottom: "4rem" },
-  buttonContainer: { width: "40rem", borderRadius: "15px" },
+  buttonContainer: { width: "40rem" },
   button: {
-    width: "14rem",
+    width: "15rem",
     height: "3rem",
     backgroundColor: "#8A26AB",
-    marginBottom: "1.5rem"
+    marginBottom: "2rem",
+    borderRadius:"50px"
   },
   buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" }
 });

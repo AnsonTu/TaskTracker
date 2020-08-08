@@ -16,12 +16,15 @@ const useStyle = makeStyles({
   mainHeader: { marginTop: "4rem", marginBottom: "1.5rem" },
   button: {
     width: "10rem",
-    height: "3rem",
+    height: "2.5rem",
     backgroundColor: "#8A26AB",
-    margin: "1.5rem 2rem 2.5rem"
+    marginLeft:"1.5rem",
+    marginRight:"1.5rem",
+    marginBottom:"3rem",
+    borderRadius:"15px"
   },
   buttonText: { color: "#FFFFFF", fontSize: "1rem", textDecoration: "none" },
-  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px" }
+  errorMessage: { color: "#FC0356", minHeight: "24px", marginTop: "-10px", paddingBottom: "1.5rem"}
 });
 
 const Signin = (props) => {
@@ -79,12 +82,12 @@ const Signin = (props) => {
               error={errorMessage}
             />
             <Field
+              label="Password"
               name="password"
               type="password"
-              label="Password"
               style={textFieldStyle}
-              autoComplete="new-password"
               component={ReduxTextField}
+              autoComplete="new-password"
               error={errorMessage}
             />
             <Typography className={classes.errorMessage}>

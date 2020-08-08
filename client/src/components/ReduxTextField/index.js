@@ -15,4 +15,4 @@ const ReduxTextField = (props) => {
   );
 };
 
-export default ReduxTextField;
+export default ReduxTextField
