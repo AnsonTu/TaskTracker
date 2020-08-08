@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
+import { format } from "date-fns";
 
 export const requireAuth = (ChildComponent) => {
   class ComposedComponent extends Component {
@@ -38,4 +39,8 @@ export const useModal = () => {
   };
 
   return { isOpen, handleOpenModal, handleCloseModal };
+};
+
+export const formatDate = (date) => {
+  return format(new Date(date), "yyyy-MM-dd");
 };

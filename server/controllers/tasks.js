@@ -4,8 +4,8 @@ exports.addtask = function (req, res, next) {
   const userID = req.user._id;
   const title = req.body.title;
   const description = req.body.description;
-  const startDate = Date.parse(req.body.startDate);
-  const dueDate = Date.parse(req.body.dueDate);
+  const startDate = req.body.startDate;
+  const dueDate = req.body.dueDate;
 
   const new_task = new Tasks({
     userID,
@@ -24,7 +24,7 @@ exports.addtask = function (req, res, next) {
 
 exports.deleteTask = function (req, res, next) {
   Tasks.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Task Number: " + req.params.id + " was deleted."))
+    .then(() => res.json(req.params.id))
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
@@ -54,19 +54,19 @@ exports.getTasks = function (req, res, next) {
     .catch((err) => res.status(400).json("Error:" + err));
 };
 
-//this will probably change, placeholder for now when I get a better feel for the UI i guess?
 exports.updateTasks = function (req, res, next) {
   Tasks.findById(req.params.id)
     .then((task) => {
-      task.title = req.body.title;
-      task.description = req.body.description;
-      task.dueDate = req.body.dueDate;
-      task.completion = req.body.completion;
-      task.startDate = req.body.startDate;
+      const { title, description, startDate, dueDate, completion } = req.body;
+      task.title = title;
+      task.description = description;
+      task.startDate = startDate;
+      task.dueDate = dueDate;
+      task.completion = completion;
 
       task
         .save()
-        .then(() => res.json("Task was updated!"))
+        .then(() => res.json(task))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
