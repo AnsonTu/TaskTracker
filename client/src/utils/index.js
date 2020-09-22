@@ -68,5 +68,6 @@ export const useModal = () => {
 };
 
 export const formatDate = (date) => {
-  return format(new Date(date), "yyyy-MM-dd");
+  const dateString = new Date(date.substring(0, 23));
+  return format(dateString, "yyyy-MM-dd");
 };
