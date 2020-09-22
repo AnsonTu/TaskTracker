@@ -25,7 +25,7 @@ class TaskList extends Component {
         <Helmet>
           <title>Tasks | Task Tracker</title>
         </Helmet>
-        <Grid item container xs={12}>
+        <Grid item container xs={9}>
           <ListColumn title="Your Tasks" showButton={true}>
             {tasks ? (
               tasks.map((task) => <TaskContainer task={task} key={task._id} />)
@@ -34,7 +34,6 @@ class TaskList extends Component {
             )}
           </ListColumn>
           <ListColumn title="Tasks In Progress"></ListColumn>
-          <ListColumn title="Completed Tasks"></ListColumn>
           <ListColumn title="Late Tasks"></ListColumn>
         </Grid>
       </PageContentContainer>

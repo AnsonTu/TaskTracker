@@ -53,7 +53,7 @@ const ListColumn = (props) => {
   const classes = useStyle();
 
   return (
-    <Grid item container xs={12} sm={2} direction="column">
+    <Grid item container xs={12} sm={3} direction="column">
       <Paper className={classes.column}>
         <Typography className={classes.title}>{title}</Typography>
         <Grid item container justify="center" xs={12}>
