@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyle = makeStyles((theme) => ({
   rootContainer: {
     background: "linear-gradient(150deg, #4A1057 30%, #a61cad 80%)",
-    height: "100vh",
+    minHeight: "100vh",
     maxWidth: "100vw",
     margin: "0",
     paddingLeft: theme.spacing(3),
